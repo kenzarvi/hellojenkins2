@@ -16,13 +16,15 @@ pipeline{
                 }
             }
         }
+
         stage('Building image') {
             steps{
                 script {
-                  dockerImage = docker.build registry 
+                  dockerImage = docker.build registry + ":latest"
                 }
              }
           }
+
           stage('Push Image') {
               steps{
                   script 
@@ -33,6 +35,7 @@ pipeline{
                    } 
                }
             }
+
         stage('Deploying into k8s'){
             steps{
                 sh 'kubectl apply -f kube-hellojenkins.yml'
