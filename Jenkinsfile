@@ -33,8 +33,10 @@ pipeline{
               steps{
                   script 
                     {
-                        docker.withRegistry( 'https://index.docker.io/v1/', registryCredential ) {
+                            docker.withTool('docker'){
+                        docker.withRegistry( '', registryCredential ) {
                             dockerImage.push()
+                        }
                         }
                    } 
                }
